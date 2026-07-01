@@ -39,7 +39,6 @@ class TestUrbanRoutes:
         time.sleep(10)
 
 
-
     def test_select_plan(self):
             self._start_comfort_caminho()
             self.page.click_call_taxi()
