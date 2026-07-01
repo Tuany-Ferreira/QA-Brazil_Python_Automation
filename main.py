@@ -23,11 +23,13 @@ class TestUrbanRoutes:
         else:
             print("Não foi possível conectar ao Urban Routes. Verifique se o servidor está ligado e ainda em execução.")
 
+
     def setup_method(self):
         self.driver.get(data.URBAN_ROUTES_URL)
         self.page = UrbanRoutesPage(self.driver)
 
-
+    def _start_comfort_caminho(self):
+        self.page.enter_locations(data.ADDRESS_FROM, data.ADDRESS_TO)
 
 
     def test_set_route(self):
@@ -36,9 +38,15 @@ class TestUrbanRoutes:
         assert self.page.get_to_location() == data.ADDRESS_TO
         time.sleep(10)
 
+
+
     def test_select_plan(self):
-        #Adicionar em S8
-        pass
+            self._start_comfort_caminho()
+            self.page.click_call_taxi()
+            self.page.select_comfort()
+            assert self.page.comfort_is_selected()
+            time.sleep(10)
+
 
     def test_fill_phone_number(self):
         #Adicionar em S8
